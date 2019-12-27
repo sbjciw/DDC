@@ -159,7 +159,7 @@
                 <Column variable="bi51"/>
             </Columns>
         </Table>
-        <WebContent url="https://sassoftware.github.io/sas-visualanalytics-thirdpartyvisualizations/samples/jsonDataViewer.html" webContentType="webDataContent" supplementalVisuals="ve62" resultDefinitions="dd60 dd61" name="ve57" data="dd58" label="Data-Driven Content - Country 1" applyDynamicBrushes="yes" sourceInteractionVariables="bi67">
+        <WebContent url="https://sbjciw.github.io/DDC/jsonDataViewer.html" webContentType="webDataContent" supplementalVisuals="ve62" resultDefinitions="dd60 dd61" name="ve57" data="dd58" label="Data-Driven Content - Country 1" applyDynamicBrushes="yes" sourceInteractionVariables="bi67">
             <EditorProperties>
                 <Property key="isAutoLabel">true</Property>
             </EditorProperties>
