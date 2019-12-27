@@ -146,7 +146,7 @@
                 <Property key="isAutoLabel">true</Property>
             </EditorProperties>
         </VisualContainer>
-        <WebContent url="https://sassoftware.github.io/sas-visualanalytics-thirdpartyvisualizations/samples/D3Thursday/10_Sunburst.html" webContentType="webDataContent" supplementalVisuals="ve44" resultDefinitions="dd42 dd43" name="ve39" data="dd40" label="Data-Driven Content - Value 1" applyDynamicBrushes="yes" sourceInteractionVariables="bi49 bi50 bi51">
+        <WebContent url="https://sbjciw.github.io/DDC/Sunburst.html" webContentType="webDataContent" supplementalVisuals="ve44" resultDefinitions="dd42 dd43" name="ve39" data="dd40" label="Data-Driven Content - Value 1" applyDynamicBrushes="yes" sourceInteractionVariables="bi49 bi50 bi51">
             <EditorProperties>
                 <Property key="isAutoLabel">true</Property>
             </EditorProperties>
