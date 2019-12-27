@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="./util/jquery-3.1.1.min.js"></script>
+    <script src="./util/jquery.csv.min.js"></script>
+	  <style>
+        html, body, #chart_div {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #chart_div {
+            position: relative;
+            border-style: none;
+            border-width: 1px;
+            overflow: auto;
+        }
+    </style>
+
+    <script>
+        "use strict";
+        if (window.addEventListener) {
+               // For standards-compliant web browsers
+               		window.addEventListener("message", onMessage, false);
+           } else {
+               				window.attachEvent("onmessage", onMessage);
+           				}
+
+           // Retrieve data and begin processing
+           function onMessage(event) {
+           		console.log("seconde onMessage");
+              if (event && event.data)
+               {
+                   //process event.data
+                   updateData(event.data);
+               }
+           }
+        
+    google.charts.load('current', {'packages':['gantt']});
+    google.charts.setOnLoadCallback(drawMap);
+    var initialized = false;
+    var _chartData = null;
+		var data = null;
+		var intervalTO = null;
+		var chart = null;        
+		var options = {
+				chartArea: {height: 350},
+				gantt: {
+            		criticalPathEnabled: true,
+            		criticalPathStyle: {
+              	stroke: '#e64a19',
+              	strokeWidth: 5
+    	        }
+  	        }
+  			};
+		
+		function daysToMilliseconds(days) {
+      return days * 24 * 60 * 60 * 1000;
+    }      
+    function drawMap() {
+            initialized = true;
+            updateData(_chartData);
+            _chartData = null;
+            
+    };
+        
+  	function drawChart() {
+  			console.table(data);
+  			console.table(chart);
+   			if (chart) chart.draw(data, options);
+   			console.trace();
+    }
+        
+    function updateData(chartData)
+        {
+            if (!initialized)
+            {
+                _chartData = chartData;
+								return;
+            }
+						if (!chartData || chartData.rowCount < 0)
+						{
+							chartData = {
+							  "version" : "1",
+			          "resultName" : "dd40",  
+							  "rowCount" : 2,
+							  "availableRowCount" : 2,
+							  "data" : [[ "Task ID1", "Task Name1", "01/01/2017", null, 1.5, 100, null ],[ "Task ID2", "Task Name2", null,"01/01/2017", 1, 0, null] ],
+							  "columns" : [ 
+								  {"label" : "taskid",
+									"type" : "string"
+								  }, 
+								  {"label" : "taskname",
+									"type" : "string",
+								  } , 
+								  {"label" : "sdate",
+									"type" : "date",
+									"usage" : "categorical",
+									"format" : {
+									  "name" : "MMDDYY",
+									  "width" : 8,
+									  "precision" : 0,
+									  "formatString" : "MMDDYY8"}
+				          }, 
+				          {"label" : "edate",
+									"type" : "date",
+									"usage" : "categorical",
+									"format" : {
+									  "name" : "MMDDYY",
+									  "width" : 8,
+									  "precision" : 0,
+									  "formatString" : "MMDDYY8" }
+				          }, 
+	                {"label" : "duration",
+									"type" : "number",
+									"usage" : "quantitative",
+									"aggregation" : "sum",
+									"format" : {
+									  "name" : "BEST",
+									  "width" : 12,
+									  "precision" : 0,
+									  "formatString" : "BEST12."}
+				          }, 
+				          {"label" : "pctcomplete",
+									"type" : "number",
+									"usage" : "quantitative",
+									"aggregation" : "sum",
+									"format" : {
+									  "name" : "BEST",
+									  "width" : 12,
+									  "precision" : 0,
+									  "formatString" : "BEST12."}
+				          },
+				          {"label" : "dependencies",
+									"type" : "string"}
+			         ]
+							};
+						}
+			
+				console.log(chartData);
+
+				if (chartData) {			
+						var arrayData;			
+						var columnInfo = chartData.columns;
+						
+						if (chartData.data)			
+						{
+							arrayData = chartData.data;
+							if (columnInfo)
+							{
+								convertDatesToDates(arrayData, columnInfo);
+								arrayData.splice(0, 0, columnInfo);
+							}				
+						}
+						else sendNoDataMessage(chartData.resultName);
+						
+		         data = google.visualization.arrayToDataTable(arrayData);
+				}
+      	else {
+                data = google.visualization.arrayToDataTable([]);
+            }
+				
+	      chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+				google.visualization.events.addListener(chart, 'ready', readyHandler);
+				drawChart();
+				google.visualization.events.addListener(chart, 'select', selectHandler);
+
+				function readyHandler(e) {
+				
+					if (chartData.selections)
+					{
+						chart.setSelection(chartData.selections);
+						selectHandler(null);
+					}
+				}			
+				
+	   	function sendNoDataMessage(resultName) {
+      	 	var message = {
+           	resultName: resultName,
+           	message: "No data items are retrieved.\nThis visualization requires following variables: \n1.taskid; \n2.taskname; \n3.start date; \n4.end date; \n5.duration; \n6.percentage completed; \n7.dependencies."
+       	};
+       		document.body.innerText=message.message;
+   		}
+   		
+			function selectHandler(e) {
+					var selection = chart.getSelection();
+					
+					var colCount = data.getNumberOfColumns();
+					var message = {
+							resultName: chartData.resultName, 
+							selections: selection
+					};
+					var url = (window.location != window.parent.location) ? document.referrer : document.location.href;
+          window.parent.postMessage(message, url);
+				};
+
+			function convertDatesToDates(data, columnInfo)
+			{
+				
+				for (var c = 0; c < columnInfo.length; c++)
+				{
+					var colInfo = columnInfo[c];
+					if (colInfo)
+					{
+						if (colInfo.type == "date")
+						{
+							for (var i = 0; i < data.length; i++)
+							{
+								var old = data[i][c];
+								if (old == '.') data[i][c] = null;
+								else 	data[i][c] = new Date(old);
+							}
+							console.log( ":::: " + data);								
+						}
+						if (colInfo.type == "string")
+						{
+							for (var i = 0; i < data.length; i++)
+							{
+								var old = data[i][c];
+								if (old=='(missing)') data[i][c] = null;
+							}
+						}
+						if (colInfo.type == "number")
+						{
+							for (var i = 0; i < data.length; i++)
+							{
+								var old = data[i][c];
+								if (old=='.') data[i][c] = null;
+								if (c==4) data[i][c]=daysToMilliseconds(data[i][c]);
+							}
+							
+						}						
+					}
+				}
+			}			
+			
+			
+		}
+    </script>
+</head>
+<body>
+    <div id="chart_div"/>
+</body>
+</html>
