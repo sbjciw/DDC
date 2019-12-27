@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><SASReport xmlns="http://www.sas.com/sasreportmodel/bird-4.1.2" label="Report DDC gantte" createdLocale="en" createdVersion="4.1.2" dateCreated="2019-12-25T01:07:31Z" dateModified="2019-12-27T08:34:30Z" createdApplication="SAS Visual Analytics 8.3.1" lastModifiedApplication="SAS Visual Analytics 8.3.1" nextUniqueNameIndex="244">
+    <DataDefinitions>
+        <ParentDataDefinition childQueryRelationship="independent" status="executable" dataSource="ds73" name="dd172">
+            <BusinessItems>
+                <RelationalDataItem name="bi177" base="bi79"/>
+                <RelationalDataItem name="bi178" base="bi80"/>
+                <RelationalDataItem name="bi179" base="bi78"/>
+                <RelationalDataItem name="bi180" base="bi76"/>
+                <RelationalDataItem name="bi181" base="bi75"/>
+                <RelationalDataItem name="bi182" base="bi77"/>
+                <RelationalDataItem name="bi183" base="bi74"/>
+            </BusinessItems>
+            <DataDefinition dataSource="ds73" type="procedural" name="dd173">
+                <ProceduralQuery type="standard">
+                    <Arguments>
+                        <ListArgument purpose="column">
+                            <ReferenceValue>bi177</ReferenceValue>
+                            <ReferenceValue>bi178</ReferenceValue>
+                            <ReferenceValue>bi179</ReferenceValue>
+                            <ReferenceValue>bi180</ReferenceValue>
+                            <ReferenceValue>bi181</ReferenceValue>
+                            <ReferenceValue>bi182</ReferenceValue>
+                            <ReferenceValue>bi183</ReferenceValue>
+                        </ListArgument>
+                    </Arguments>
+                </ProceduralQuery>
+                <ResultDefinitions>
+                    <ResultDefinition purpose="primary" maxRowsLookup="customContent" maxRowsBehavior="truncate" name="dd174"/>
+                    <ResultDefinition purpose="formatted" maxRowsLookup="customContent" maxRowsBehavior="truncate" format="JSONX" name="dd175"/>
+                </ResultDefinitions>
+            </DataDefinition>
+        </ParentDataDefinition>
+        <ParentDataDefinition childQueryRelationship="independent" status="executable" dataSource="ds73" name="dd196">
+            <BusinessItems>
+                <RelationalDataItem name="bi201" base="bi79"/>
+                <RelationalDataItem name="bi202" base="bi80"/>
+                <RelationalDataItem name="bi203" base="bi78"/>
+                <RelationalDataItem name="bi204" base="bi76"/>
+                <RelationalDataItem name="bi205" base="bi75"/>
+                <RelationalDataItem name="bi206" base="bi77"/>
+                <RelationalDataItem name="bi207" base="bi74"/>
+            </BusinessItems>
+            <DataDefinition dataSource="ds73" type="procedural" name="dd197">
+                <ProceduralQuery type="standard">
+                    <Arguments>
+                        <ListArgument purpose="column">
+                            <ReferenceValue>bi201</ReferenceValue>
+                            <ReferenceValue>bi202</ReferenceValue>
+                            <ReferenceValue>bi203</ReferenceValue>
+                            <ReferenceValue>bi204</ReferenceValue>
+                            <ReferenceValue>bi205</ReferenceValue>
+                            <ReferenceValue>bi206</ReferenceValue>
+                            <ReferenceValue>bi207</ReferenceValue>
+                        </ListArgument>
+                    </Arguments>
+                </ProceduralQuery>
+                <ResultDefinitions>
+                    <ResultDefinition purpose="primary" maxRowsLookup="customContent" maxRowsBehavior="truncate" name="dd198"/>
+                    <ResultDefinition purpose="formatted" maxRowsLookup="customContent" maxRowsBehavior="truncate" format="JSONX" name="dd199"/>
+                </ResultDefinitions>
+            </DataDefinition>
+        </ParentDataDefinition>
+    </DataDefinitions>
+    <DataSources>
+        <DataSource label="GANTTDATA" type="relational" name="ds73">
+            <CasResource server="cas-shared-default" library="CASUSER(sbjciw)" table="GANTTDATA" locale="en_US"/>
+            <BusinessItemFolder>
+                <DataItem name="bi74" xref="Dependencies"/>
+                <DataItem name="bi75" xref="Duration"/>
+                <DataItem name="bi76" xref="EndDate" format="MMDDYY8"/>
+                <DataItem name="bi77" xref="PctComplete"/>
+                <DataItem name="bi78" xref="StartDate" format="MMDDYY8"/>
+                <DataItem name="bi79" xref="TaskID"/>
+                <DataItem name="bi80" xref="TaskName"/>
+                <PredefinedDataItem calculation="totalCount" name="bi81" label="Frequency" usage="quantitative" format="COMMA12."/>
+                <PredefinedDataItem calculation="totalCountPercent" name="bi82" label="Frequency Percent" usage="quantitative" format="PERCENT20.2"/>
+            </BusinessItemFolder>
+        </DataSource>
+    </DataSources>
+    <VisualElements>
+        <WebContent url="https://sassoftware.github.io/sas-visualanalytics-thirdpartyvisualizations/samples/jsonDataViewer.html" webContentType="webDataContent" supplementalVisuals="ve176" resultDefinitions="dd174 dd175" name="ve171" data="dd172" label="Data-Driven Content - TaskID 2" applyDynamicBrushes="yes" sourceInteractionVariables="bi177 bi178 bi179 bi180 bi183">
+            <EditorProperties>
+                <Property key="isAutoLabel">true</Property>
+            </EditorProperties>
+        </WebContent>
+        <Table columnSizing="autoFill" resultDefinitions="dd174" name="ve176" data="dd172" applyDynamicBrushes="yes">
+            <Columns>
+                <Column variable="bi177"/>
+                <Column variable="bi178"/>
+                <Column variable="bi179"/>
+                <Column variable="bi180"/>
+                <Column variable="bi181"/>
+                <Column variable="bi182"/>
+                <Column variable="bi183"/>
+            </Columns>
+        </Table>
+        <WebContent url="https://sbjciw.github.io/DDC/gantt_work.html" webContentType="webDataContent" supplementalVisuals="ve200" resultDefinitions="dd198 dd199" name="ve195" data="dd196" label="Data-Driven Content - TaskID 1" applyDynamicBrushes="yes" sourceInteractionVariables="bi201 bi202 bi203 bi204 bi207">
+            <EditorProperties>
+                <Property key="isAutoLabel">true</Property>
+            </EditorProperties>
+        </WebContent>
+        <Table columnSizing="autoFill" resultDefinitions="dd198" name="ve200" data="dd196" applyDynamicBrushes="yes">
+            <Columns>
+                <Column variable="bi201"/>
+                <Column variable="bi202"/>
+                <Column variable="bi203"/>
+                <Column variable="bi204"/>
+                <Column variable="bi205"/>
+                <Column variable="bi206"/>
+                <Column variable="bi207"/>
+            </Columns>
+        </Table>
+        <VisualContainer name="ve243" label="Layout Container 1" selectionDisabled="true">
+            <EditorProperties>
+                <Property key="visualType">LAYOUT_CONTAINER</Property>
+                <Property key="isAutoLabel">true</Property>
+            </EditorProperties>
+        </VisualContainer>
+    </VisualElements>
+    <View>
+        <Section name="vi100" label="Page 2">
+            <Body>
+                <MediaContainer target="mt2">
+                    <ResponsiveLayout orientation="vertical" overflow="fit">
+                        <Weights mediaTarget="mt5" unit="percent">
+                            <Weight value="100%"/>
+                        </Weights>
+                        <Weights mediaTarget="mt4" unit="percent">
+                            <Weight value="100%"/>
+                        </Weights>
+                        <Weights mediaTarget="mt3" unit="percent">
+                            <Weight value="100%"/>
+                        </Weights>
+                    </ResponsiveLayout>
+                    <Container ref="ve243" name="vi242">
+                        <ResponsiveConstraint>
+                            <WidthConstraint>
+                                <Width mediaTarget="mt3" preferredSizeBehavior="honor" flexibility="shrinkable"/>
+                            </WidthConstraint>
+                            <HeightConstraint>
+                                <Height mediaTarget="mt3" preferredSizeBehavior="honor" flexibility="shrinkable"/>
+                            </HeightConstraint>
+                        </ResponsiveConstraint>
+                        <ResponsiveLayout orientation="vertical" overflow="grow"/>
+                        <Visual ref="ve195" name="vi194">
+                            <ResponsiveConstraint>
+                                <WidthConstraint>
+                                    <Width mediaTarget="mt3" preferredSizeBehavior="ignore" value="50%" flexibility="shrinkable"/>
+                                </WidthConstraint>
+                                <HeightConstraint>
+                                    <Height mediaTarget="mt3" preferredSizeBehavior="ignore" flexibility="flexible"/>
+                                </HeightConstraint>
+                            </ResponsiveConstraint>
+                        </Visual>
+                        <Visual ref="ve171" name="vi170">
+                            <ResponsiveConstraint>
+                                <WidthConstraint>
+                                    <Width mediaTarget="mt3" preferredSizeBehavior="ignore" value="50%" flexibility="flexible"/>
+                                </WidthConstraint>
+                                <HeightConstraint>
+                                    <Height mediaTarget="mt3" preferredSizeBehavior="ignore" flexibility="flexible"/>
+                                </HeightConstraint>
+                            </ResponsiveConstraint>
+                        </Visual>
+                    </Container>
+                </MediaContainer>
+            </Body>
+        </Section>
+    </View>
+    <MediaSchemes>
+        <MediaScheme name="ms1">
+            <BaseStylesheetResource theme="marine"/>
+            <Stylesheet><![CDATA[]]></Stylesheet>
+        </MediaScheme>
+    </MediaSchemes>
+    <MediaTargets>
+        <MediaTarget windowSize="default" scheme="ms1" name="mt2"/>
+        <MediaTarget windowSize="small" scheme="ms1" name="mt3"/>
+        <MediaTarget windowSize="medium" scheme="ms1" name="mt4"/>
+        <MediaTarget windowSize="large" scheme="ms1" name="mt5"/>
+    </MediaTargets>
+    <Properties>
+        <Property key="lastSection">vi100</Property>
+        <Property key="displayDataSource">ds73</Property>
+    </Properties>
+    <ExportProperties>
+        <Export destination="pdf">
+            <Property key="showCoverPage" value="true"/>
+            <Property key="showPageNumbers" value="true"/>
+        </Export>
+    </ExportProperties>
+    <History>
+        <Versions>
+            <Version key="4.1.2" lastDate="2019-12-25T01:07:31Z"/>
+        </Versions>
+    </History>
+    <SASReportState>
+        <View/>
+    </SASReportState>
+</SASReport>
